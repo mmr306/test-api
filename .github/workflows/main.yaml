@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with: 
-          path: '/home/runner/work/test-api/test-api/'
+          path: $GITHUB_WORKSPACE
       - uses: mmr306/test-api@main
         with:
           license-server: "127.0.0.1:1099"
