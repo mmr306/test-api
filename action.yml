@@ -28,8 +28,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: ls -l
-      shell: bash
     - run: docker run -v=${{ inputs.readyapi-project-folder }}:/project -v=${{ inputs.readyapi-reports-folder }}:/reports -v=${{ inputs.readyapi-extensions-folder }}:/ext -e LICENSE_SERVER=${{ inputs.license-server }} -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/${{ inputs.project-file }}'" smartbear/ready-api-soapui-testrunner:latest
       shell: bash
     - run: docker inspect smartbear/ready-api-soapui-testrunner:latest --format='{{.State.ExitCode}}'
