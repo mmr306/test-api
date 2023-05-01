@@ -5,18 +5,18 @@ on: push
 jobs:
   checkout:
     runs-on: ubuntu-latest
-    container: 
-      image: smartbear/ready-api-soapui-testrunner
-      volumes:
-        - ~/project:/project
-          # ~/reports:/reports
-          # "~/extensions":/ext
-      env:
-        LICENSE_SERVER: "127.0.0.1:1099"
-        COMMAND_LINE: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/api-test.yaml'"
+    # container: 
+    #   image: smartbear/ready-api-soapui-testrunner
+    #   volumes:
+    #     - ~/project:/project
+    #       # ~/reports:/reports
+    #       # "~/extensions":/ext
+    #   env:
+    #     LICENSE_SERVER: "127.0.0.1:1099"
+    #     COMMAND_LINE: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/api-test.yaml'"
     steps:
       - uses: actions/checkout@v3
         with: 
           path: '~/'
       - name: Check for dockerenv file
-        run: ls /project
+        run: docker run -v=~/project:/project -v=~/reports:/reports -v=~/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" -it smartbear/ready-api-soapui-testrunner:latest
