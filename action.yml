@@ -1,17 +1,17 @@
 # action.yml
-name: Swagger Editor Validator
-description: This GitHub Actions validates OpenAPI (OAS) definition file using Swagger Editor.
+name: ReadyAPI testing
+description: This GitHub Action uses the ReadyAPI SoapUI Docker container to run tests
 inputs:
   readyapi-project-folder:
-    description: Folder that container ReadyApi project
+    description: Folder that container ReadyAPI project
     required: false
     default: project
   readyapi-extensions-folder:
-    description: Folder that container ReadyApi project
+    description: Folder that container ReadyAPI project
     required: false
     default: extensions
   readyapi-reports-folder:
-    description: Folder that container ReadyApi project
+    description: Folder that container ReadyAPI project
     required: false
     default: reports
   license-server:
