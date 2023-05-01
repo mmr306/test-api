@@ -19,4 +19,4 @@ jobs:
         with: 
           path: '~/'
       - name: Check for dockerenv file
-        run: docker run -v=~/project:/project -v=~/reports:/reports -v=~/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" -it smartbear/ready-api-soapui-testrunner:latest
+        run: docker run -v=~/project:/project -v=~/reports:/reports -v=~/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" smartbear/ready-api-soapui-testrunner:latest
