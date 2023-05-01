@@ -5,15 +5,15 @@ inputs:
   readyapi-project-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: /project
+    default: ./project
   readyapi-extensions-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: /extensions
+    default: ./extensions
   readyapi-reports-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: /reports
+    default: ./reports
   license-server:
     description: Server where ReadyAPI license exists
     required: true
@@ -24,11 +24,11 @@ inputs:
   project-file:
     description: File in project folder to test
     required: false
-    default: /api-test.yaml
+    default: api-test.yaml
 runs:
   using: composite
   steps:
-    - run: cd ${{ github.action_path }} && docker run -v=$GITHUB_WORKSPACE/${{ inputs.readyapi-project-folder }}:/project -v=$GITHUB_WORKSPACE/{{ inputs.readyapi-reports-folder }}:/reports -v=$GITHUB_WORKSPACE/${{ inputs.readyapi-extensions-folder }}:/ext -e LICENSE_SERVER=${{ inputs.license-server }} -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/${{ inputs.project-file }}'" smartbear/ready-api-soapui-testrunner:latest
+    - run: cd $GITHUB_WORKSPACE && docker run -v=${{ inputs.readyapi-project-folder }}:/project -v={{ inputs.readyapi-reports-folder }}:/reports -v=${{ inputs.readyapi-extensions-folder }}:/ext -e LICENSE_SERVER=${{ inputs.license-server }} -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/${{ inputs.project-file }}'" smartbear/ready-api-soapui-testrunner:latest
       shell: bash
     - run: docker inspect smartbear/ready-api-soapui-testrunner:latest --format='{{.State.ExitCode}}'
       shell: bash
