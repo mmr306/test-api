@@ -8,7 +8,9 @@ jobs:
     container: 
       image: smartbear/ready-api-soapui-testrunner
       volumes:
-        [~/project:/project,~/reports:/reports,~/extensions:/ext]
+        - ~/project:/project
+          # ~/reports:/reports
+          # "~/extensions":/ext
       env:
         LICENSE_SERVER: "127.0.0.1:1099"
         COMMAND_LINE: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/api-test.yaml'"
@@ -17,4 +19,4 @@ jobs:
         with: 
           path: '~/'
       - name: Check for dockerenv file
-        run: ls /project && ls /reports && ls /extensions
+        run: ls /project
