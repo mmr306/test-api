@@ -28,9 +28,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - run: echo $GITHUB_WORKSPACE
-      shell: bash
-    - run: cd ${{ github.action_path }} && docker run -v=${{ inputs.readyapi-project-folder }}:/project -v=${{ inputs.readyapi-reports-folder }}:/reports -v=${{ inputs.readyapi-extensions-folder }}:/ext -e LICENSE_SERVER=${{ inputs.license-server }} -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/${{ inputs.readyapi-project-file }}'" smartbear/ready-api-soapui-testrunner:latest
+    - run: cd ${{ github.action_path }} && docker run -v=$GITHUB_WORKSPACE/${{ inputs.readyapi-project-folder }}:/project -v=$GITHUB_WORKSPACE/{{ inputs.readyapi-reports-folder }}:/reports -v=$GITHUB_WORKSPACE/${{ inputs.readyapi-extensions-folder }}:/ext -e LICENSE_SERVER=${{ inputs.license-server }} -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/${{ inputs.project-file }}'" smartbear/ready-api-soapui-testrunner:latest
       shell: bash
     - run: docker inspect smartbear/ready-api-soapui-testrunner:latest --format='{{.State.ExitCode}}'
       shell: bash
