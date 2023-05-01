@@ -3,21 +3,10 @@ name: Pull from GitHub
 on: push
 
 jobs:
-  checkout:
+  checkout-and-test:
     runs-on: ubuntu-latest
-    # container: 
-    #   image: smartbear/ready-api-soapui-testrunner
-    #   volumes:
-    #     - ~/project:/project
-    #       # ~/reports:/reports
-    #       # "~/extensions":/ext
-    #   env:
-    #     LICENSE_SERVER: "127.0.0.1:1099"
-    #     COMMAND_LINE: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/api-test.yaml'"
     steps:
       - uses: actions/checkout@v3
       - uses: mmr306/test-api@main
         with:
           license-server: "127.0.0.1:1099"
-      # - name: Check for dockerenv file
-      #   run: docker run -v=/home/runner/work/test-api/test-api/project:/project -v=/home/runner/work/test-api/test-api/reports:/reports -v=/home/runner/work/test-api/test-api/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" smartbear/ready-api-soapui-testrunner:latest
