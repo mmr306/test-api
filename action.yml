@@ -5,15 +5,15 @@ inputs:
   readyapi-project-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: ./project
+    default: project
   readyapi-extensions-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: ./extensions
+    default: extensions
   readyapi-reports-folder:
     description: Folder that container ReadyApi project
     required: false
-    default: ./reports
+    default: reports
   license-server:
     description: Server where ReadyAPI license exists
     required: true
