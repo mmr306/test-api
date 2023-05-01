@@ -1,0 +1,37 @@
+# action.yml
+name: Swagger Editor Validator
+description: This GitHub Actions validates OpenAPI (OAS) definition file using Swagger Editor.
+inputs:
+  readyapi-project-folder:
+    description: Folder that container ReadyApi project
+    required: false
+    default: /project
+  readyapi-extensions-folder:
+    description: Folder that container ReadyApi project
+    required: false
+    default: /extensions
+  readyapi-reports-folder:
+    description: Folder that container ReadyApi project
+    required: false
+    default: /reports
+  license-server:
+    description: Server where ReadyAPI license exists
+    required: true
+  command-line-options:
+    description: Command line arguments for test runner
+    required: false
+    default: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'"
+  project-file:
+    description: File in project folder to test
+    required: false
+    default: /api-test.yaml
+runs:
+  using: composite
+  steps:
+    - run: cd ${{ github.action_path }} && docker run -v=/home/runner/work/test-api/test-api/project:/project -v=/home/runner/work/test-api/test-api/reports:/reports -v=/home/runner/work/test-api/test-api/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" smartbear/ready-api-soapui-testrunner:latest
+      shell: bash
+    - run: docker inspect smartbear/ready-api-soapui-testrunner:latest --format='{{.State.ExitCode}}'
+      shell: bash
+branding:
+  icon: 'file-text'
+  color: 'green'

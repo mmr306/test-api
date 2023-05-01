@@ -18,5 +18,8 @@ jobs:
       - uses: actions/checkout@v3
         with: 
           path: '/home/runner/work/test-api/test-api/'
-      - name: Check for dockerenv file
-        run: docker run -v=/home/runner/work/test-api/test-api/project:/project -v=/home/runner/work/test-api/test-api/reports:/reports -v=/home/runner/work/test-api/test-api/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" smartbear/ready-api-soapui-testrunner:latest
+      - uses: mmr306/test-api@main
+        with:
+          license-server: "127.0.0.1:1099"
+      # - name: Check for dockerenv file
+      #   run: docker run -v=/home/runner/work/test-api/test-api/project:/project -v=/home/runner/work/test-api/test-api/reports:/reports -v=/home/runner/work/test-api/test-api/extensions:/ext -e LICENSE_SERVER="127.0.0.1:1099" -e COMMAND_LINE="-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/Sample-readyapi-project.xml'" smartbear/ready-api-soapui-testrunner:latest
