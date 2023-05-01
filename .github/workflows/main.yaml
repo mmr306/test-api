@@ -16,8 +16,6 @@ jobs:
     #     COMMAND_LINE: "-f/%reports% '-RJUnit-Style HTML Report' -FHTML '-EDefault environment' '/%project%/api-test.yaml'"
     steps:
       - uses: actions/checkout@v3
-        with: 
-          path: $GITHUB_WORKSPACE
       - uses: mmr306/test-api@main
         with:
           license-server: "127.0.0.1:1099"
